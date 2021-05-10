@@ -1,3 +1,7 @@
+body {
+	background-color: rgb(71,75,80);
+}
+
 #my-knob {
     color: #ffffff !important;
     font-color : #ffffff;
@@ -7,3 +11,5 @@
 	color: #ffffff;
 	stroke-width:20;
 }
+
+

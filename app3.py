@@ -30,9 +30,10 @@ import base64
 from base64 import decodestring
 from urllib.parse import quote as urlquote
 import plotly.express as px
+import plotly.graph_objects as go
+from plotly.graph_objs import Layout
 
-
-app = dash.Dash(__name__)
+app = dash.Dash(__name__,external_stylesheets=[dbc.themes.BOOTSTRAP])
 app.config['suppress_callback_exceptions']=True
 app.config.suppress_callback_exceptions = True
 
@@ -41,25 +42,90 @@ primaryImage = ""
 
 buttonStyle= {'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)','padding':'10px','font-family':'Times New Roman'}
 NavbuttonStyle= {'text-shadow': '4px 6px 4px rgba(0, 0, 0, 0.5)','background-color':'rgb(97, 98, 99)','padding':'10px 18px','font-family':'Times New Roman','color':'white','border':'none'}
+
+items = [
+    dbc.DropdownMenuItem("Item 1"),
+    dbc.DropdownMenuItem("Item 2"),
+    dbc.DropdownMenuItem("Item 3"),
+]
 #,'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
 ###########################################################################################################################################################
 ## Top Nav Bar 
 app.layout = html.Div([
     html.Div([
-        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\home.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
-        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\info.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'50px'} ),
-        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\phone.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'50px'} ),
-        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\help-circle.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'50px'} ),        
-        html.A(html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\rotate-cw.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'50px'} ), href='/'),
-        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\credit-card.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'50px'} ),
-        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\log-in.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
-        ],style={'display':'block','background-color':'rgb(56, 59, 79)',"position": "fixed",'width':'100%','height':'5%','margin-left': '10%','top':0,'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.9), 0 6px 20px 0 rgba(0, 0, 0, 0.4)'}),
+        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/home.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/info.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'50px'} ),
+        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/phone.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'50px'} ),
+        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/help-circle.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'50px'} ),        
+        html.A(html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/rotate-cw.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'50px'} ), href='/'),
+        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/credit-card.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'50px'} ),
+        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/log-in.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+        ],style={'display':'block','background-color':'rgb(71,75,80)',"position": "fixed",'width':'100%','height':'10%','margin-left': '10%','top':0,'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.9), 0 6px 20px 0 rgba(0, 0, 0, 0.4)'}),
+        html.Br(),
+        html.Br(),
+
+        html.Div(
+                [
+                    dbc.DropdownMenu(id='basicImageProcessing',
+                        label="Image", color="secondary", className="m-1", children=[dbc.DropdownMenuItem("transform"), dbc.DropdownMenu(children=[dbc.DropdownMenuItem("HSV",id='convertoHSV'), dbc.DropdownMenuItem("HSB"), dbc.DropdownMenuItem("YPbPr"),dbc.DropdownMenuItem("YCbCr"), dbc.DropdownMenuItem("LAB"),],label="color", color="secondary", className="m-1", direction="right"), dbc.DropdownMenuItem("overlay"), dbc.DropdownMenuItem("statistics"),]
+                    ),
+                    dbc.DropdownMenu(
+                        label="operation", color="secondary", className="m-1", children=[dbc.DropdownMenuItem("noise"), dbc.DropdownMenuItem("edges"), dbc.DropdownMenuItem("smooth"), dbc.DropdownMenuItem("sharpen"),dbc.DropdownMenuItem("brightness"),dbc.DropdownMenuItem("contrast"),dbc.DropdownMenuItem("make binary"),dbc.DropdownMenuItem("filter"),]
+                    ),
+                    dbc.DropdownMenu(
+                        label="analyze", color="secondary", className="m-1", children=[dbc.DropdownMenuItem("transform"), dbc.DropdownMenuItem("color"), dbc.DropdownMenuItem("overlay"), dbc.DropdownMenuItem("statistics"),]
+                    ),
+                    dbc.DropdownMenu(
+                        label="overlay", color="secondary", className="m-1", children=[dbc.DropdownMenuItem("transform"), dbc.DropdownMenuItem("color"), dbc.DropdownMenuItem("overlay"), dbc.DropdownMenuItem("statistics"),]
+                    ),
+                    dbc.DropdownMenu(
+                        label="statistics", color="secondary", className="m-1", children=[dbc.DropdownMenuItem("transform"), dbc.DropdownMenuItem("color"), dbc.DropdownMenuItem("overlay"), dbc.DropdownMenuItem("statistics"),]
+                    ),
+                    dbc.DropdownMenu(
+                        label="Preprocessing", color="secondary", className="m-1", children=[dbc.DropdownMenuItem("Image Labeling"), dbc.DropdownMenuItem("Augmentation"), dbc.DropdownMenu(children=[dbc.DropdownMenuItem("convert to YOLO"), dbc.DropdownMenuItem("convert to tf_records"),], label="object detection", color="secondary", className="m-1", direction="right"), dbc.DropdownMenuItem("object detection"), dbc.DropdownMenuItem("statistics"),]
+                    ),
+                    dbc.DropdownMenu(
+                        label="Preprocessing", color="secondary", className="m-1", children=[dbc.DropdownMenuItem("scientific"), dbc.DropdownMenuItem("Augmentation"), dbc.DropdownMenu(children=[dbc.DropdownMenuItem("convert to YOLO"), dbc.DropdownMenuItem("convert to tf_records"),], label="object detection", color="secondary", className="m-1", direction="right"), dbc.DropdownMenuItem("object detection"), dbc.DropdownMenuItem("statistics"),]
+                    ),
+                    dbc.DropdownMenu(items, label="Info", color="secondary", className="m-1"),
+                    dbc.DropdownMenu(items, label="Link", color="secondary", className="m-1"),
+                ],
+                style={"display": "flex", "flexWrap": "wrap",'margin-left':'470px', 'margin-top':'1px', 'position':'fixed','z-index':'1'},
+            ),
+                # dcc.Dropdown(
+                #                 id='main-ImageDropdown',
+                #                 options=[
+                #                     {'label': 'Image', 'value': ' '},
+                #                     {'label': 'transform', 'value': 'transform'},
+                #                     {'label': 'color', 'value': 'color'},
+                #                     {'label': 'overlay', 'value': 'overlay'},
+                #                     {'label': 'statistics', 'value': 'statistics'},
+                #                         ],
+                #                 searchable=False,
+                #                 value=' ',
+                #                 style={'top':10,'margin':'10px','width':'25%','margin-left':'220px','align':'center','color':'black','textAlign':'center','box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.09)'}),
+                # dcc.Dropdown(
+                #                 id='main-ProcessorDropdown',
+                #                 options=[
+                #                     {'label': 'operation', 'value': 'op'},
+                #                     {'label': 'Detect edges', 'value': 'edges'},
+                #                     {'label': 'smooth / shapen', 'value': 'sands'},
+                #                     {'label': 'brightness / contrast', 'value': 'candb'},
+                #                     {'label': 'noise', 'value': 'noise'},
+                #                     {'label': 'make binary', 'value': 'binaryImage'},
+                #                     {'label': 'filter', 'value': 'filter'},
+                #                         ],
+                #                 searchable=False,
+                #                 value='op',
+                #                 style={'width':'25%','top':10,'margin-left':'270px','align':'center','color':'black','textAlign':'center','box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.09)'}),
+
+                # ]),
 ###################################################
 ###################################################
     html.Div([
-        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\logo.png', 'rb').read()).decode()),width=75),
+        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/logo.png', 'rb').read()).decode()),width=75),
         #html.Img(src=app.get_asset_url('./assets/logo.png')),
-        html.H2("Control panel", className="display-4"),
+        html.H2("Control panel", className="display-5"),
         #html.Br(),
         # html.P(
         #     "Change parameters and settings here", className="lead"
@@ -89,10 +155,15 @@ app.layout = html.Div([
                 dcc.Input(id="ClusterInput", type="number", placeholder="Number of Clusters", style={ 'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)', 'padding':'12px','font-family':'Times New Roman'}),
                 html.Button('Cluster', id='generateCluster', style={'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)','padding':'10px','font-family':'Times New Roman'}),
             ],id='kMeansColorClustering',style={'display':'None'}),
-        html.Div([
-            html.Br(),
-            html.Div(style={'margin':'15px'}), #,id='imagesize'
-            ],id='reduceSizeButton', style={'margin':'10px','display':'block','position':'relative'}),
+   
+        dcc.Loading(
+                id="loading-1_23",
+                type="default",
+        children= [html.Div([
+                    html.Br(),
+                    html.Div(style={'margin':'15px'}), #,id='imagesize'
+                ],id='reduceSizeButton', style={'margin':'10px','display':'block','position':'relative'}),]),
+
         html.Div([],id='basicOperations'),
         html.Div([], id='basicOperations_sub'),
         html.Div([], id='basicOperations_sub1'),
@@ -104,7 +175,7 @@ app.layout = html.Div([
         html.Div([], id='basicOperations_sub7'),
         
     ],
-    style={"position": "fixed","top": 0,"left": 0, "bottom": 0, "width": "25%", "padding": "2rem 1rem", "background-color": "gray", 'box-shadow': '0 20px 18px 0 rgba(0, 0, 0, 1)'}, #https://www.w3schools.com/w3css/w3css_sidebar.asp
+    style={"position": "fixed","top": 0,"left": 0, "bottom": 0, "width": "25%", "padding": "2rem 1rem", "background-color": "rgb(71,75,80)", 'box-shadow': '0 20px 18px 0 rgba(0, 0, 0, 1)'}, #https://www.w3schools.com/w3css/w3css_sidebar.asp
 ),
 ################################################################
 ## end of left menu
@@ -113,18 +184,18 @@ app.layout = html.Div([
 
 html.Div([
         html.Br(),
-        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\cpu.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
-        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\crop.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
-        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\delete.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
-        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\save.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/cpu.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/crop.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/delete.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/save.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
 
-        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\compass.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
-        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\edit.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
-        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\droplet.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
-        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\upload-cloud.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/compass.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/edit.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/droplet.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/upload-cloud.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
 
-        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\rotate-cw.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
-        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\rotate-ccw.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/rotate-cw.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+        html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/rotate-ccw.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
 
         
         html.Div([
@@ -142,8 +213,15 @@ html.Div([
                                 html.Div(id='knob-output')
                             ],id='knob', style={'display':'block','filter':' drop-shadow(-2px 4px 4px rgba(0, 0, 0, 0.9))'}),
 
+        html.Div([
+            dcc.Loading(id='histogramLoading',
+                    type='default',
+                    children=[html.Div([],id='HISTOGRAM',style={'right':5, 'display':'block','top':345,'width':'10%', 'height':'10%','filter':' drop-shadow(-2px 4px 4px rgba(0, 0, 0, 0.9))'}),],
+                    ),
+            ]),
+        
 
-        ],style={'right':5, 'position':'fixed','top':45, 'width':'10%','height':'95%', 'background-color':'#525151', 'box-shadow': '0 6px 12px 0 rgba(0, 0, 0, 1)'}),
+        ],style={'right':5, 'position':'fixed','top':45, 'width':'10%','height':'95%', 'background-color':'rgb(71,75,80)', 'box-shadow': '0 6px 12px 0 rgba(0, 0, 0, 1)'}),
 ################################################################
 ## end of right menu
 ################################################################
@@ -157,13 +235,13 @@ html.Div([
     html.H2('Upload your image',style={'display':'block'},id='upload-button'),
     
     html.Div([
-      ######    html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\arrow-left.png','rb').read()).decode()),width=28, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'50px','display': 'block'} ),
+      ######    html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/arrow-left.png','rb').read()).decode()),width=28, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'50px','display': 'block'} ),
       dcc.Upload(
         id='upload-image',
         children=html.Div([
             'Drag and Drop or ',
             html.A('Select color image'),
-            #html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\owl.png', 'rb').read()).decode()),width=200, style={'z-index': '-1','position':'absolete','left': '0px',})
+            #html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/owl.png', 'rb').read()).decode()),width=200, style={'z-index': '-1','position':'absolete','left': '0px',})
         ]),
         style={
             'width': '150%',
@@ -183,7 +261,7 @@ html.Div([
         # max_size= 100000
     ),
 
-    ######      html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets\\svgtopng\\arrow-right.png','rb').read()).decode()),width=28, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'50px','display': 'block'} ),
+    ######      html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/arrow-right.png','rb').read()).decode()),width=28, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'50px','display': 'block'} ),
     #html.Button('Upload', id='button',style={'display':'block', 'textAlign':'center','position':'absolete','top':'50%','left':'50%'}),
     
           ], style={'textAlign': 'center','display': 'inline-block','position':'relative', 'margin-left': 'auto', 'margin-right': 'auto', 'width': '32.5%','background-image': 'url(https://www.pexels.com/photo/scenic-view-of-agricultural-field-against-sky-during-sunset-325944/)'}, className="five columns"),
@@ -198,6 +276,7 @@ html.Div([
                                                 'padding-left': '40px',
                                                 'padding-right': '40px',
                                                 'padding-topg': '25px',
+                                                # 'z-index':'-1',
                                                 'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}),
 
     html.Div([
@@ -205,7 +284,12 @@ html.Div([
     dcc.Loading(
                 id="loading-1_1",
                 type="default",
-                children= [html.Div(id='basicOperationsOutput', style={'box-shadow': '0 4px 12px 0 rgba(0, 0, 0, 1)', 'margin':'15px'}),]
+                children= [html.Div(id='basicOperationsOutput', style={'box-shadow': '0 4px 12px 0 rgba(0, 0, 0, 1)', 'margin':'15px', 'top':'300px'}),]
+                ),  
+    dcc.Loading(
+                id="loading-1_22",
+                type="default",
+                children= [html.Div(id='basicImgeProcessing', style={'box-shadow': '0 4px 12px 0 rgba(0, 0, 0, 1)', 'margin':'15px', 'top':'300px'}),]
                 ),    
     
     html.Img(id='ColorSegmentation-img', width=500, style={'box-shadow': '0 4px 12px 0 rgba(0, 0, 0, 1)', 'margin':'15px', 'position':'absolete'}),
@@ -217,43 +301,63 @@ html.Div([
             html.Div(id='container-button-basic'),
             html.Div([html.Button('Save', id='save-output', style={'display':'None'})]), #, Download(id="download")
             html.Br(),
-            html.Div([
-                        html.Button('Download image', id='SAVE', 
-                            style={'display':'block'
-                                    ,'position':'relative',
-                                    'top': '45%','left': '45%',
-                                    'font-size': '16px',
-                                    'padding': '8px 12px',
-                                    'border-radius': '4px',
-                                    'text-align': 'center',
-                                    'align':'center',
-                                    'color':'black',
-                                    'font-family':'Times New Roman',
-                                    'box-shadow': '0 4px 12px 0 rgba(0, 0, 0, 1)',
-                                    'textAlign':'center'})
-                        ,Download(id="download")
-                    ]),
+            # html.Div([
+            #             html.Button('Download image', id='SAVE', 
+            #                 style={'display':'block'
+            #                         ,'position':'relative',
+            #                         'top': '45%','left': '45%',
+            #                         'font-size': '16px',
+            #                         'padding': '8px 12px',
+            #                         'border-radius': '4px',
+            #                         'text-align': 'center',
+            #                         'align':'center',
+            #                         'color':'black',
+            #                         'font-family':'Times New Roman',
+            #                         'box-shadow': '0 4px 12px 0 rgba(0, 0, 0, 1)',
+            #                         'textAlign':'center'})
+            #             ,Download(id="download")
+            #         ]),
             html.Br(),
             ]),#className="five columns", style={'height':'100', 'width':'100'}),
  
-], style={'textAlign': 'center','background-color': 'rgb(59, 63, 71)','color': 'white', 'font-family':'Times New Roman','margin-left': '10%','margin-right': 'auto','width': '100%'})
+], style={'textAlign': 'center','background-color': 'rgb(71,75,80)','color': 'white', 'font-family':'Times New Roman','margin-left': '10%','margin-right': 'auto','width': '100%'})
     ], style={'textAlign': 'center','background-color': 'rgb(59, 63, 71)','color': 'white', 'font-family':'Times New Roman','align':'center','margin-top':0,'top':0,'margin':'None','max-width': '100%', 'overflow-x': 'hidden'})
 ########################################################################################################################################
 ########################################################################################################################################
 # END OF MAIN HTML DIV
 ########################################################################################################################################
 ########################################################################################################################################
+# def updateAndDisplay():
+    
+
 
 def parse_contents(contents):#, filename, date):
-    return html.Div([
-        DashCanvas(id='annot-canvas',
-               lineWidth=5,
-               image_content = contents,
-               width=565,
-               height=100,
-               goButtonTitle='Segment'
-               ),
-    ]),
+    # return html.Div([
+        if contents is not None: 
+            data = contents.encode("utf8").split(b";base64,")[1]
+            img = io.BytesIO()
+            img.write(base64.b64decode(data))
+            img.seek(0)
+            i = np.asarray(bytearray(img.read()), dtype=np.uint8)
+            i = cv2.imdecode(i, cv2.IMREAD_COLOR)
+            i = cv2.cvtColor(i, cv2.COLOR_RGB2BGR)
+            figu = px.imshow(i, width=920, height=510, binary_string=True)
+            figu.update_layout(dragmode="drawrect")
+            figu.update_layout(margin=dict(l=0, r=0, t=0, b=0)),
+            figu.update_xaxes(showticklabels=False)
+            figu.update_yaxes(showticklabels=False)
+            Igraph = dcc.Graph(id='multiAnnotation',figure=figu, 
+                                    config=config, style= BOStyle)
+            return Igraph
+
+        # DashCanvas(id='annot-canvas',
+        #        lineWidth=5,
+        #        image_content = contents,
+        #        width=565,
+        #        height=100,
+        #        goButtonTitle='Segment'
+        #        ),
+    # ]),
 
 @app.callback([Output('output-image-upload', 'children'),Output('upload-image', 'style'),Output('upload-button', 'style')],
               [Input('upload-image', 'contents')])#,
@@ -704,7 +808,7 @@ def editMenu(mainOpt):
     Input('blur','value'),
     Input('thresh','value')])
 
-def returnBOsub(mainOpt, blur, thresh):
+def returnBOsub(mainOpt, blur, thresh): # 
     if mainOpt == 'BO':
         if blur is True:
             return [dcc.Dropdown(
@@ -1072,13 +1176,15 @@ def hypyerFunction(BasicImage, basic , grey,  blur, thresh):#, blurGKS, blurType
         i = np.asarray(bytearray(img.read()), dtype=np.uint8)
         i = cv2.imdecode(i, cv2.IMREAD_COLOR)
         i = cv2.cvtColor(i, cv2.COLOR_RGB2BGR)
+        # get image height and width to update plotly layout
     
         if basic == 'BO':
             figu = px.imshow(i, width=920, height=510)
             figu.update_layout(dragmode="drawrect")
             figu.update_layout(margin=dict(l=0, r=0, t=0, b=0)),
-            figu.update_xaxes(showticklabels=False)
-            figu.update_yaxes(showticklabels=False)
+            figu.update_xaxes(showticklabels=False),
+            figu.update_yaxes(showticklabels=False),
+            figu.update_layout({'plot_bgcolor':'rgb(71,75,80)','paper_bgcolor':'rgb(71,75,80)'}),
             Igraph = dcc.Graph(id='multiAnnotation',figure=figu, 
                             config=config, style= BOStyle), {'display':'None'}
             #print(basic)
@@ -1132,18 +1238,82 @@ def hypyerFunction(BasicImage, basic , grey,  blur, thresh):#, blurGKS, blurType
         
         return Igraph
 
-# @app.callback([Output('basicOperationsOutput','children'), Output('output-image-upload','style')],
-#             [Input('upload-image', 'contents'),  
-#             Input('main-functionsDropdown', 'value'),
-#             Input('blur','value'),
-#             Input('blurKernelSize','value'),
-#               ]
-#               #[State('GaussianblurKernelSize','value')]
-#               ,prevent_initial_call=True) 
 
-# def blurOperation(blurImg, mainOptblur, blr, k_size):
-#     if 
+@app.callback([Output('HISTOGRAM','children')], #, Output('3Dsurface','children')
+            [Input('upload-image', 'contents')]
+              ,prevent_initial_call=True) 
 
+def HistogramImg(BasicImage):
+    if BasicImage is not None:
+        data = BasicImage.encode("utf8").split(b";base64,")[1]
+        img = io.BytesIO()
+        img.write(base64.b64decode(data))
+        img.seek(0)
+        i = np.asarray(bytearray(img.read()), dtype=np.uint8)
+        i = cv2.imdecode(i, cv2.IMREAD_COLOR)
+        i = cv2.cvtColor(i, cv2.COLOR_RGB2BGR)
+        layout = Layout(
+            # plot_bgcolor='rgba(82, 81, 81,1)'
+            plot_bgcolor='grey'
+        )
+        fig = go.Figure(layout = layout)
+        for channel, color in enumerate(['red', 'green', 'blue']):
+            fig.add_trace(go.Histogram(x=i[..., channel].ravel(), opacity=0.5, marker_color=color, name='%s channel' %color))
+        fig.update_layout(showlegend=False)
+        fig.update_layout(paper_bgcolor="rgba(82, 81, 81,1)")
+        fig.update_layout(barmode='overlay', font=dict(color="white", family="Times New Roman, monospace",))
+        fig.update_layout(autosize=False, height=150, width=258)
+        # fig.update_layout(width=300)
+        # fig.update_layout(autosize=True)
+        fig.update_layout(margin=dict(l=0, r=0, b=0, t=0, pad=4),)
+        
+        fig.update_layout(xaxis = {'showgrid': False}, yaxis = {'showgrid': False }),
+        # fig.update_layout(dragmode="drawrect")
+        fig.update_layout(margin=dict(l=0, r=0, t=0, b=0)),
+        # figu.update_xaxes(showticklabels=False)
+        # figu.update_yaxes(showticklabels=False)
+        Igraph = dcc.Graph(id='multiAnnotation',figure=fig, 
+                                    config=config)
+
+        return [Igraph]#, [Igraph2]
+
+
+
+# @app.callback([Output('basicImgeProcessing','children'), Output('output-image-upload','style')], #, Output('3Dsurface','children') #Output('HISTOGRAM','children'), #[Output('basicImgeProcessing','children'), Output('output-image-upload','style')]
+@app.callback(Output('basicImgeProcessing','children'),
+            [Input('upload-image', 'contents'), Input('convertoHSV','n_clicks')]
+              ,prevent_initial_call=True) 
+
+def basicImageProcessing(bip, convertoHSV_): # bip: basic image processing
+    if convertoHSV_ == True:
+        if bip is not None:
+            data = bip.encode("utf8").split(b";base64,")[1]
+            img = io.BytesIO()
+            img.write(base64.b64decode(data))
+            img.seek(0)
+            i = np.asarray(bytearray(img.read()), dtype=np.uint8)
+            i = cv2.imdecode(i, cv2.IMREAD_COLOR)
+            # i = cv2.cvtColor(i, cv2.COLOR_RGB2BGR)
+            from skimage.color import rgb2hsv
+            hsv_img = rgb2hsv(i)
+            hue_img = hsv_img[:, :, 0]
+            hue_threshold = 0.04
+            binary_img = hue_img > hue_threshold
+            figu = px.imshow(binary_img, width=920, height=510, binary_string=True)
+            figu.update_layout(dragmode="drawrect")
+            figu.update_layout(margin=dict(l=0, r=0, t=0, b=0)),
+            figu.update_xaxes(showticklabels=False)
+            figu.update_yaxes(showticklabels=False)
+            Igraph = dcc.Graph(id='multiAnnotation',figure=figu, 
+                                    config=config, style= BOStyle)#, {'display':'None'}
+
+            return Igraph
+
+
+
+
+    
+    
 
 
 if __name__ == '__main__':
