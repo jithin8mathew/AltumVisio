@@ -444,7 +444,7 @@ def colorScheme(mainFunc):
 
 @app.callback([Output('sliderRange', 'children'),Output('HSVsliderRange', 'children')],
               [Input('main-functionsDropdown', 'value'),Input('thresholdColor-functionsDropdown', 'value'),#,Input('upload-image', 'contents')]
-              ])
+              ],prevent_initial_call=True,)
 
 def displaySliders(mainFuncColorspace ,colorSpaceOption):
     if mainFuncColorspace == 'ColorSeg':
@@ -477,6 +477,8 @@ def displaySliders(mainFuncColorspace ,colorSpaceOption):
                                         #html.Div(id='output-container-range-slider')
                             ],style={'margin':'5%',}), None
             #return {'display':'block'}, {'display':'None'}
+        else:
+            raise PreventUpdate
 
         if colorSpaceOption == 'HSVColor':
             return None, html.Div([
@@ -503,8 +505,12 @@ def displaySliders(mainFuncColorspace ,colorSpaceOption):
                                         ),
                                         #html.Div(id='output-container-HSVrange-slider')
                             ],style={'margin':'5%'}) 
+        else:
+            raise PreventUpdate    
     else:
-        return [None], [None]
+        raise PreventUpdate
+    # else:
+    #     return [None], [None]
 
 @app.callback(Output('output-container-range-slider', 'children'),
              [Input('main-functionsDropdown', 'value'),Input('red', 'value'),Input('green', 'value'),Input('blue', 'value')],
@@ -541,7 +547,7 @@ def update_HSVslider(MainColorspaceOptHSV, value, value2, value3):
               [Input('upload-image', 'contents'),              
               Input('main-functionsDropdown', 'value'),#,Input('upload-image', 'contents')]
               Input('red', 'value'),Input('green', 'value'),Input('blue', 'value'),
-              ]) 
+              ],prevent_initial_call=True,) 
 
 def segmentColorRange(content, mainFunc, rvalue, gvalue, bvalue): #featureType, , hueValue, SatValue, ValValue
     #print(rvalue)
@@ -568,7 +574,7 @@ def segmentColorRange(content, mainFunc, rvalue, gvalue, bvalue): #featureType, 
               
               Input('main-functionsDropdown', 'value'),#,Input('upload-image', 'contents')]
               Input('hue', 'value'),Input('saturation', 'value'),Input('val', 'value')
-              ]) 
+              ],prevent_initial_call=True,) 
 
 
 def segmentColorRange(content, mainFunc, h, s, v): #featureType, , hueValue, SatValue, ValValue
@@ -806,7 +812,7 @@ def editMenu(mainOpt):
 @app.callback(Output('basicOperations_sub','children'),
     [Input('main-functionsDropdown','value'),
     Input('blur','value'),
-    Input('thresh','value')])
+    Input('thresh','value')],prevent_initial_call=True,)
 
 def returnBOsub(mainOpt, blur, thresh): # 
     if mainOpt == 'BO':
@@ -821,6 +827,8 @@ def returnBOsub(mainOpt, blur, thresh): #
                                 ],
                             value='blr',
                             style={'margin':'4px','width':'150px','display':'inline-block','align':'center','text-align':'left','color':'black','textAlign':'center','box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.09)'}),]
+        # else:
+
         if thresh is True:
             return [dcc.Dropdown(
                         id='simplethresholdColor-functionsDropdown',
