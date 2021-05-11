@@ -350,14 +350,6 @@ def parse_contents(contents):#, filename, date):
                                     config=config, style= BOStyle)
             return Igraph
 
-        # DashCanvas(id='annot-canvas',
-        #        lineWidth=5,
-        #        image_content = contents,
-        #        width=565,
-        #        height=100,
-        #        goButtonTitle='Segment'
-        #        ),
-    # ]),
 
 @app.callback([Output('output-image-upload', 'children'),Output('upload-image', 'style'),Output('upload-button', 'style')],
               [Input('upload-image', 'contents')])#,
@@ -1271,8 +1263,6 @@ def HistogramImg(BasicImage):
         fig.update_layout(paper_bgcolor="rgba(82, 81, 81,1)")
         fig.update_layout(barmode='overlay', font=dict(color="white", family="Times New Roman, monospace",))
         fig.update_layout(autosize=False, height=150, width=258)
-        # fig.update_layout(width=300)
-        # fig.update_layout(autosize=True)
         fig.update_layout(margin=dict(l=0, r=0, b=0, t=0, pad=4),)
         
         fig.update_layout(xaxis = {'showgrid': False}, yaxis = {'showgrid': False }),
