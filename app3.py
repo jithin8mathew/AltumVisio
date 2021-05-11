@@ -48,7 +48,6 @@ items = [
     dbc.DropdownMenuItem("Item 2"),
     dbc.DropdownMenuItem("Item 3"),
 ]
-#,'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
 ###########################################################################################################################################################
 ## Top Nav Bar 
 app.layout = html.Div([
@@ -173,6 +172,7 @@ app.layout = html.Div([
         html.Div([], id='basicOperations_sub5'),
         html.Div([], id='basicOperations_sub6'),
         html.Div([], id='basicOperations_sub7'),
+        html.Div([], id='hue_segmentationThreshold'),
         
     ],
     style={"position": "fixed","top": 0,"left": 0, "bottom": 0, "width": "25%", "padding": "2rem 1rem", "background-color": "rgb(71,75,80)", 'box-shadow': '0 20px 18px 0 rgba(0, 0, 0, 1)'}, #https://www.w3schools.com/w3css/w3css_sidebar.asp
@@ -1277,12 +1277,33 @@ def HistogramImg(BasicImage):
 
 
 
-# @app.callback([Output('basicImgeProcessing','children'), Output('output-image-upload','style')], #, Output('3Dsurface','children') #Output('HISTOGRAM','children'), #[Output('basicImgeProcessing','children'), Output('output-image-upload','style')]
-@app.callback(Output('basicImgeProcessing','children'),
-            [Input('upload-image', 'contents'), Input('convertoHSV','n_clicks')]
-              ,prevent_initial_call=True) 
 
-def basicImageProcessing(bip, convertoHSV_): # bip: basic image processing
+@app.callback(Output('hue_segmentationThreshold','children'),
+            Input('convertoHSV','n_clicks')
+             ,prevent_initial_call=True )
+
+def displayHueThresholdSlider(hsv_buttonClick):
+    if hsv_buttonClick == True:
+        return [html.Div([
+                html.H5('threshold'),
+                     dcc.Slider(
+                        id='Hsv_segmentatino_Threshold',
+                        min=0,
+                        max=1,
+                        step=0.01,
+                        value=0.04,),
+                                ],style={'margin':'1%'})]
+    else:
+        raise PreventUpdate
+        # return None 
+
+
+## @app.callback([Output('basicImgeProcessing','children'), Output('output-image-upload','style')], #, Output('3Dsurface','children') #Output('HISTOGRAM','children'), #[Output('basicImgeProcessing','children'), Output('output-image-upload','style')]
+@app.callback(Output('basicImgeProcessing','children'),
+            [Input('upload-image', 'contents'), Input('convertoHSV','n_clicks'), Input('Hsv_segmentatino_Threshold','value')],
+            prevent_initial_call=True) 
+
+def basicImageProcessing(bip, convertoHSV_, hue_threshold_): # bip: basic image processing
     if convertoHSV_ == True:
         if bip is not None:
             data = bip.encode("utf8").split(b";base64,")[1]
@@ -1295,7 +1316,7 @@ def basicImageProcessing(bip, convertoHSV_): # bip: basic image processing
             from skimage.color import rgb2hsv
             hsv_img = rgb2hsv(i)
             hue_img = hsv_img[:, :, 0]
-            hue_threshold = 0.04
+            hue_threshold = hue_threshold_
             binary_img = hue_img > hue_threshold
             figu = px.imshow(binary_img, width=920, height=510, binary_string=True)
             figu.update_layout(dragmode="drawrect")
@@ -1306,12 +1327,8 @@ def basicImageProcessing(bip, convertoHSV_): # bip: basic image processing
                                     config=config, style= BOStyle)#, {'display':'None'}
 
             return Igraph
-
-
-
-
-    
-    
+    else:
+        raise PreventUpdate
 
 
 if __name__ == '__main__':
@@ -1319,3 +1336,4 @@ if __name__ == '__main__':
 
 # fonts referenced from here : https://feathericons.com/?query=up
 # https://svgtopng.com/
+# add waitress
