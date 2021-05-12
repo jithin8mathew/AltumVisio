@@ -81,7 +81,7 @@ app.layout = html.Div([
                         label="statistics", color="secondary", className="m-1", children=[dbc.DropdownMenuItem("transform"), dbc.DropdownMenuItem("color"), dbc.DropdownMenuItem("overlay"), dbc.DropdownMenuItem("statistics"),]
                     ),
                     dbc.DropdownMenu(
-                        label="Preprocessing", color="secondary", className="m-1", children=[dbc.DropdownMenuItem("Image Labeling"), dbc.DropdownMenuItem("Augmentation"), dbc.DropdownMenu(children=[dbc.DropdownMenuItem("convert to YOLO"), dbc.DropdownMenuItem("convert to tf_records"),], label="object detection", color="secondary", className="m-1", direction="right"), dbc.DropdownMenuItem("object detection"), dbc.DropdownMenuItem("statistics"),]
+                        label="Preprocessing", color="secondary", className="m-1", children=[dbc.DropdownMenuItem("Extract frames"), dbc.DropdownMenuItem("Image Labeling"), dbc.DropdownMenuItem("Augmentation"), dbc.DropdownMenu(children=[dbc.DropdownMenuItem("convert to YOLO"), dbc.DropdownMenuItem("convert to tf_records"),], label="object detection", color="secondary", className="m-1", direction="right"), dbc.DropdownMenuItem("object detection"), dbc.DropdownMenuItem("statistics"),]
                     ),
                     dbc.DropdownMenu(
                         label="Preprocessing", color="secondary", className="m-1", children=[dbc.DropdownMenuItem("scientific"), dbc.DropdownMenuItem("Augmentation"), dbc.DropdownMenu(children=[dbc.DropdownMenuItem("convert to YOLO"), dbc.DropdownMenuItem("convert to tf_records"),], label="object detection", color="secondary", className="m-1", direction="right"), dbc.DropdownMenuItem("object detection"), dbc.DropdownMenuItem("statistics"),]
