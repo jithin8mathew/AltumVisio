@@ -638,7 +638,7 @@ def kMeans(content, mainFunc, nClusters, clicks):
                     image_div.append(html.Div([
                                             html.Img(src=array_to_data_url(img_as_ubyte(ex_img)),width =300,style={'box-shadow': '0 4px 12px 0 rgba(0, 0, 0, 1)', 'margin':'None', 'padding':'None', 'margin-top':'76%'})
                                             ], className="col-sm"))
-                return html.Div([div for div in image_div], className="row")
+                return html.Div([html.Div([div for div in image_div], className="row")], className="carousel slide")
         except Exception:pass
 
 ####################################################################################
