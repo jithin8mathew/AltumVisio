@@ -625,6 +625,7 @@ def kMeans(content, mainFunc, nClusters, clicks):
                 _,labels,centers = cv2.kmeans(Z, nClusters, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
                 labels = labels.reshape((img.shape[:-1]))
                 image_div=[]
+                temp_image_div = []
                 for i, c in enumerate(centers):
                     print(c)
                     mask = cv2.inRange(labels, i, i)
@@ -635,10 +636,18 @@ def kMeans(content, mainFunc, nClusters, clicks):
                     ex_img = cv2.bitwise_and(img, mask)
                     ex_img = cv2.cvtColor(ex_img, cv2.COLOR_BGR2RGB)
 
-                    image_div.append(html.Div([
-                                            html.Img(src=array_to_data_url(img_as_ubyte(ex_img)),width =300,style={'box-shadow': '0 4px 12px 0 rgba(0, 0, 0, 1)', 'margin':'None', 'padding':'None', 'margin-top':'76%'})
-                                            ], className="col-sm"))
-                return html.Div([html.Div([div for div in image_div], className="row")], className="carousel slide")
+                    # image_div.append(html.Div([
+                    #                         html.Img(src=array_to_data_url(img_as_ubyte(ex_img)),width =300,style={'box-shadow': '0 4px 12px 0 rgba(0, 0, 0, 1)', 'margin':'None', 'padding':'None', 'margin-top':'76%'})
+                    #                         ], className="col-sm"))
+                    # card_content = html.Img(src=array_to_data_url(img_as_ubyte(ex_img)),width =300,style={'box-shadow': '0 4px 12px 0 rgba(0, 0, 0, 1)', 'margin':'None', 'padding':'None', 'margin-top':'76%'})
+                    cluster_count = 0
+                    temp_image_div.append(dbc.Card([dbc.CardImg(src=array_to_data_url(img_as_ubyte(ex_img))),],style={"width": "18rem"},),)
+                    if cluster_count % 3 ==0:
+                        image_div.append(dbc.Row([temp_image for temp_image in temp_image_div],className="mb-4",))
+                        temp_image_div = []
+                    cluster_count+=1
+                # return html.Div([html.Div([div for div in image_div], className="row")], style={'margin':'None', 'max-width': '100%', 'overflow-x': 'hidden'})
+                return html.Div([div for div in image_div])
         except Exception:pass
 
 ####################################################################################
