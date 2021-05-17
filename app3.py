@@ -124,7 +124,7 @@ app.layout = html.Div([
     html.Div([
         html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/logo.png', 'rb').read()).decode()),width=75),
         #html.Img(src=app.get_asset_url('./assets/logo.png')),
-        html.H2("Control panel", className="display-5"),
+        html.H5("Control panel", className="display-5"),
         #html.Br(),
         # html.P(
         #     "Change parameters and settings here", className="lead"
@@ -232,7 +232,7 @@ html.Div([
     html.Hr(),
     html.H1('Image Processing: AltumVīsiō',style={'text-shadow': '4px 6px 4px rgba(0, 0, 0, 1)','margin-top':'50px'}),
     html.Br(),
-    html.H2('Upload your image',style={'display':'block'},id='upload-button'),
+    html.H5('Upload your image',style={'display':'block'},id='upload-button'),
     
     html.Div([
       ######    html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/arrow-left.png','rb').read()).decode()),width=28, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'50px','display': 'block'} ),
@@ -634,10 +634,11 @@ def kMeans(content, mainFunc, nClusters, clicks):
                     mask = np.dstack([mask]*3) # Make it 3 channel
                     ex_img = cv2.bitwise_and(img, mask)
                     ex_img = cv2.cvtColor(ex_img, cv2.COLOR_BGR2RGB)
+
                     image_div.append(html.Div([
-                                            html.Img(src=array_to_data_url(img_as_ubyte(ex_img)),width =600,style={'box-shadow': '0 4px 12px 0 rgba(0, 0, 0, 1)', 'margin':'15px'})
-                                            ]))
-                return image_div
+                                            html.Img(src=array_to_data_url(img_as_ubyte(ex_img)),width =300,style={'box-shadow': '0 4px 12px 0 rgba(0, 0, 0, 1)', 'margin':'None', 'padding':'None', 'margin-top':'76%'})
+                                            ], className="col-sm"))
+                return html.Div([div for div in image_div], className="row")
         except Exception:pass
 
 ####################################################################################
