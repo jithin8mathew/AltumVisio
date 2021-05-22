@@ -643,11 +643,11 @@ def kMeans(content, mainFunc, nClusters, clicks):
                     cluster_count = 0
                     temp_image_div.append(dbc.Card([dbc.CardImg(src=array_to_data_url(img_as_ubyte(ex_img))),],style={"width": "18rem"},),)
                     if cluster_count % 3 ==0:
-                        image_div.append(dbc.Row([temp_image for temp_image in temp_image_div],className="mb-4",))
+                        image_div.append(dbc.Col([temp_image for temp_image in temp_image_div],className="mb-4",))
                         temp_image_div = []
                     cluster_count+=1
                 # return html.Div([html.Div([div for div in image_div], className="row")], style={'margin':'None', 'max-width': '100%', 'overflow-x': 'hidden'})
-                return html.Div([div for div in image_div])
+                return html.Div([div for div in image_div], style={'overflow':'scroll','align':'center', 'display':'block', 'margin-top':'30%'})
         except Exception:pass
 
 ####################################################################################
