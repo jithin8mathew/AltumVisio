@@ -121,7 +121,121 @@ app.layout = html.Div([
                 # ]),
 ###################################################
 ###################################################
-    html.Div([
+#     html.Div([
+#         html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/logo.png', 'rb').read()).decode()),width=75),
+#         #html.Img(src=app.get_asset_url('./assets/logo.png')),
+#         html.H5("Control panel", className="display-5"),
+#         #html.Br(),
+#         # html.P(
+#         #     "Change parameters and settings here", className="lead"
+#         # ),
+#         html.Div(id='sliderRange',style={'display':'block'}),
+#         html.Div(id='HSVsliderRange',style={'display':'block'}),
+#         html.Div(id='output-container-range-slider',style={'display':'block'}),
+#         html.Div(id='output-container-HSVrange-slider',style={'display':'block'}),
+#         html.Div([
+#                 html.Br(),
+#                 dcc.Dropdown(
+#                                 id='main-functionsDropdown',
+#                                 options=[
+#                                     {'label': 'kMeans color segmentation', 'value': 'kMeans'},
+#                                     {'label': 'Resize', 'value': 'resize'},
+#                                     {'label': 'RGB Color segmentation', 'value': 'ColorSeg'},
+#                                     {'label': 'Crop Image', 'value': 'crop'},
+#                                     {'label': 'Image Processing', 'value': 'imageProcessing'},
+#                                     {'label': 'YOLO', 'value': 'YOLO Annotation'},
+#                                     {'label': 'Basic operations', 'value': 'BO'},
+#                                         ],
+#                                 value='kMeans',
+#                                 style={'width':'100%','align':'center','color':'black','textAlign':'center','box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.09)'}),
+#                 ],style={'margin':'5%'}),
+#         html.Div(id='ColorSegmentationSubsection-img', style={'display':'None'}),
+#         html.Div([
+#                 dcc.Input(id="ClusterInput", type="number", placeholder="Number of Clusters", style={ 'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)', 'padding':'12px','font-family':'Times New Roman'}),
+#                 html.Button('Cluster', id='generateCluster', style={'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)','padding':'10px','font-family':'Times New Roman'}),
+#             ],id='kMeansColorClustering',style={'display':'None'}),
+   
+#         dcc.Loading(
+#                 id="loading-1_23",
+#                 type="default",
+#         children= [html.Div([
+#                     html.Br(),
+#                     html.Div(style={'margin':'15px'}), #,id='imagesize'
+#                 ],id='reduceSizeButton', style={'margin':'10px','display':'block','position':'relative'}),]),
+
+#         html.Div([],id='basicOperations'),
+#         html.Div([], id='basicOperations_sub'),
+#         html.Div([], id='basicOperations_sub1'),
+#         html.Div([], id='basicOperations_sub2'),
+#         html.Div([], id='basicOperations_sub3'),
+#         html.Div([], id='basicOperations_sub4'),
+#         html.Div([], id='basicOperations_sub5'),
+#         html.Div([], id='basicOperations_sub6'),
+#         html.Div([], id='basicOperations_sub7'),
+#         html.Div([], id='hue_segmentationThreshold'),
+        
+#     ],
+#     style={"position": "fixed","top": 0,"left": 0, "bottom": 0, "width": "25%", "padding": "2rem 1rem", "background-color": "rgba(71,75,80, 0.1)", 'box-shadow': '0 20px 18px 0 rgba(0, 0, 0, 1)'}, #https://www.w3schools.com/w3css/w3css_sidebar.asp
+# ),
+################################################################
+## end of left menu
+## begning of right menu
+################################################################
+
+# html.Div([
+#         html.Br(),
+#         html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/cpu.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+#         html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/crop.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+#         html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/delete.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+#         html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/save.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+
+#         html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/compass.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+#         html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/edit.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+#         html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/droplet.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+#         html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/upload-cloud.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+
+#         html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/rotate-cw.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+#         html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/svgtopng/rotate-ccw.png','rb').read()).decode()),width=18, style={'filter':' drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.9))','margin':'10px', 'margin-left':'25px'} ),
+
+        
+#         html.Div([
+#                                 daq.Knob(
+#                                     id='my-knob',   
+#                                     size=80,
+#                                     min=-3,
+#                                     max=3,
+#                                     value=0,
+#                                     color='black',
+#                                     #theme={'dark':True,'secondary': '#ffffff',},
+#                                     theme = {'dark':True,'background-color': '#303030', 'color': 'white', 'font-color':'white'},
+#                                     #scale={'style':{'font-size':'50px', 'color':'black'}}
+#                                 ),
+#                                 html.Div(id='knob-output')
+#                             ],id='knob', style={'display':'block','filter':' drop-shadow(-2px 4px 4px rgba(0, 0, 0, 0.9))'}),
+
+#         html.Div([
+#             dcc.Loading(id='histogramLoading',
+#                     type='default',
+#                     children=[html.Div([],id='HISTOGRAM',style={'right':5, 'display':'block','top':345,'width':'10%', 'height':'10%','filter':' drop-shadow(-2px 4px 4px rgba(0, 0, 0, 0.9))'}),],
+#                     ),
+#             ]),
+        
+
+#         ],style={'right':5, 'position':'fixed','top':45, 'width':'10%','height':'95%', 'background-color':'rgba(71,75,80, 0.1)', 'box-shadow': '0 6px 12px 0 rgba(0, 0, 0, 1)'}),
+################################################################
+## end of right menu
+################################################################
+###################################################################################################################################################
+##############              Begining of HTML main div          
+###################################################################################################################################################
+html.Div([
+    ##############################################################################
+
+    ### left menu ###############
+
+    #############################################################################3
+
+        html.Div([
         html.Img(src='data:image/png;base64,{}'.format(base64.b64encode(open('assets/logo.png', 'rb').read()).decode()),width=75),
         #html.Img(src=app.get_asset_url('./assets/logo.png')),
         html.H5("Control panel", className="display-5"),
@@ -175,12 +289,13 @@ app.layout = html.Div([
         html.Div([], id='hue_segmentationThreshold'),
         
     ],
-    style={"position": "fixed","top": 0,"left": 0, "bottom": 0, "width": "25%", "padding": "2rem 1rem", "background-color": "rgba(71,75,80, 0.1)", 'box-shadow': '0 20px 18px 0 rgba(0, 0, 0, 1)'}, #https://www.w3schools.com/w3css/w3css_sidebar.asp
+    style={"position": "fixed","top": 0,"left": 0, "bottom": 0, "width": "20%", "padding": "2rem 1rem",'borderRadius': '15px', "background-color": "rgba(71,75,80, 0.1)", 'box-shadow': '0 20px 18px 0 rgba(0, 0, 0, 1)'}, #https://www.w3schools.com/w3css/w3css_sidebar.asp
 ),
-################################################################
-## end of left menu
-## begning of right menu
-################################################################
+    ##############################################################################
+
+    ### right menu ###############
+
+    #############################################################################3
 
 html.Div([
         html.Br(),
@@ -221,14 +336,9 @@ html.Div([
             ]),
         
 
-        ],style={'right':5, 'position':'fixed','top':45, 'width':'10%','height':'95%', 'background-color':'rgba(71,75,80, 0.1)', 'box-shadow': '0 6px 12px 0 rgba(0, 0, 0, 1)'}),
-################################################################
-## end of right menu
-################################################################
-###################################################################################################################################################
-##############              Begining of HTML main div          
-###################################################################################################################################################
-html.Div([
+        ],style={'right':0, 'position':'fixed','top':0, 'bottom':0 ,'borderRadius': '15px', 'width':'10%','height':'100%', 'background-color':'rgba(71,75,80, 0.1)', 'box-shadow': '0 6px 12px 0 rgba(0, 0, 0, 1)'}),
+##################################################################################
+
     html.Hr(),
     html.H1('Image Processing: AltumVīsiō',style={'text-shadow': '4px 6px 4px rgba(0, 0, 0, 1)','margin-top':'50px'}),
     html.Br(),
@@ -273,10 +383,10 @@ html.Div([
                                                 'align':'center',
                                                 'margin-left': 'auto', 
                                                 'margin-right': 'auto', 
-                                                'padding-left': '40px',
-                                                'padding-right': '40px',
-                                                'padding-topg': '25px',
-                                                # 'z-index':'-1',
+                                                # 'padding-left': '50px',
+                                                # 'padding-right': '50px',
+                                                # 'padding-topg': '25px',
+                                                # # 'z-index':'-1',
                                                 'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}),
 
     html.Div([
@@ -304,7 +414,7 @@ html.Div([
             html.Br(),
             ]),#className="five columns", style={'height':'100', 'width':'100'}),
  
-], style={'textAlign': 'center','background-color': 'rgba(71,75,80, 0.1)','background-image' : 'url(/assets/iceland_s.png)', 'background-size': 'cover','opacity': '0.9','color': 'white', 'font-family':'Times New Roman','margin-left': '10%','margin-right': 'auto','width': '80%','margin-top': '5%', 'filter':' drop-shadow(-8px -8px 6px rgba(0, 0, 0, 0.2)','borderRadius': '15px', }, id='lstmnd')
+], style={'textAlign': 'center','background-color': 'rgba(71,75,80, 0.1)','background-image' : 'url(/assets/iceland_s.png)', 'background-size': 'cover','opacity': '0.9','color': 'white', 'font-family':'Times New Roman','margin-left': '8%','margin-right': '8%','width': '85%','margin-top': '3%','margin-bottom': '3%', 'filter':' drop-shadow(-8px -8px 6px rgba(0, 0, 0, 0.2)','borderRadius': '15px', 'box-shadow': '0 20px 18px 0 rgba(0, 0, 0, 1)'}, id='lstmnd')
     ], style={'textAlign': 'center','background-color': 'rgba(59, 63, 71, 0.1)','color': 'white', 'font-family':'Times New Roman','align':'center','margin-top':0,'top':0,'margin':'None','max-width': '100%', 'overflow-x': 'hidden'})
 ########################################################################################################################################
 ########################################################################################################################################
