@@ -1,6 +1,21 @@
 body {
-	background-color: rgb(71,75,80);
+	
 	font-family:'Times New Roman', Helvetica;
+  background-image : url('\\assets\\iceland_s_blr.png');
+  background-size: cover;
+  backdrop-filter: blur(5px);
+  
+  /*filter:opacity(30%);*/
+  /*opacity: 0.5;*/
+}
+
+
+#lstmnd{
+  background-image: url('\\assets\\iceland_s.png');
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+ opacity: 0.5; 
+
 }
 
 #my-knob {
