@@ -340,7 +340,7 @@ html.Div([
 ##################################################################################
 
     html.Hr(),
-    html.H1('Image Processing: AltumVīsiō',style={'text-shadow': '4px 6px 4px rgba(0, 0, 0, 1)','margin-top':'50px'}),
+    html.H1('AltumVīsiō',style={'font-family':'Optima','margin-top':'50px', 'font-size':'50px'}), #'text-shadow': '4px 6px 4px rgba(0, 0, 0, 1)'
     html.Br(),
     html.H5('Upload your image',style={'display':'block'},id='upload-button'),
     
