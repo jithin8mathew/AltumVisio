@@ -67,7 +67,7 @@ app.layout = html.Div([
                 [
                     dbc.DropdownMenu(id='basicImageProcessing',
                         label="Image", color="secondary", className="m-1", children=[dbc.DropdownMenuItem("transform"), dbc.DropdownMenu(children=[dbc.DropdownMenuItem("HSV",id='convertoHSV'), dbc.DropdownMenuItem("HSB"), dbc.DropdownMenuItem("YPbPr"),dbc.DropdownMenuItem("YCbCr"), dbc.DropdownMenuItem("LAB"),],label="color", color="secondary", className="m-1", direction="right"), dbc.DropdownMenuItem("overlay"), dbc.DropdownMenuItem("statistics"),]
-                    ),
+                    , style={'border': '2px solid black', 'background-color':'white', 'color':'rgba(0, 0, 0, 0.2)'}),
                     dbc.DropdownMenu(
                         label="operation", color="secondary", className="m-1", children=[dbc.DropdownMenuItem("noise"), dbc.DropdownMenuItem("edges"), dbc.DropdownMenuItem("smooth"), dbc.DropdownMenuItem("sharpen"),dbc.DropdownMenuItem("brightness"),dbc.DropdownMenuItem("contrast"),dbc.DropdownMenuItem("make binary"),dbc.DropdownMenuItem("filter"),]
                     ),
@@ -261,7 +261,7 @@ html.Div([
                                     {'label': 'Basic operations', 'value': 'BO'},
                                         ],
                                 value='kMeans',
-                                style={'width':'100%','align':'center','color':'black','textAlign':'center','box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.09)'}),
+                                style={'border-radius': '5px','border': '1px solid rgba(0, 0, 0, 0.01)','color':'white', 'background-color':'rgba(0, 0, 0, 0.01)', 'color':'rgba(0, 0, 0, 0.01)','width':'100%','align':'center','color':'black','textAlign':'center','box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.09)'}),
                 ],style={'margin':'5%'}),
         html.Div(id='ColorSegmentationSubsection-img', style={'display':'None'}),
         html.Div([
@@ -410,6 +410,10 @@ html.Div([
             html.Div(id='color_range'),
             html.Div(id='container-button-basic'),
             html.Div([html.Button('Save', id='save-output', style={'display':'None'})]), #, Download(id="download")
+            html.Br(),
+            html.Br(),
+            html.Br(),
+            html.Br(),
             html.Br(),
             html.Br(),
             ]),#className="five columns", style={'height':'100', 'width':'100'}),
