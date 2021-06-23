@@ -414,7 +414,7 @@ html.Div([
             html.Br(),
             ]),#className="five columns", style={'height':'100', 'width':'100'}),
  
-], style={'textAlign': 'center','background-color': 'rgba(71,75,80, 0.1)','background-image' : 'url(/assets/iceland_s.png)', 'background-size': 'cover','opacity': '0.9','color': 'white', 'font-family':'Times New Roman','margin-left': '8%','margin-right': '8%','width': '85%','margin-top': '3%','margin-bottom': '3%', 'filter':' drop-shadow(-8px -8px 6px rgba(0, 0, 0, 0.2)','borderRadius': '15px', 'box-shadow': '0 20px 18px 0 rgba(0, 0, 0, 1)'}, id='lstmnd')
+], style={'textAlign': 'center','background-color': 'rgba(71,75,80, 0.1)','background-image' : 'url(/assets/iceland_s.png)', 'background-size': 'cover','opacity': '0.9','color': 'white', 'font-family':'Times New Roman','margin-left': '8%','margin-right': '8%','width': '85%','margin-top': '3%','margin-bottom': '3%', 'filter':' drop-shadow(-8px -8px 6px rgba(0, 0, 0, 0.2)','borderRadius': '15px', 'box-shadow': '0 30px 18px 0 rgba(0, 0, 0, 1)'}, id='lstmnd')
     ], style={'textAlign': 'center','background-color': 'rgba(59, 63, 71, 0.1)','color': 'white', 'font-family':'Times New Roman','align':'center','margin-top':0,'top':0,'margin':'None','max-width': '100%', 'overflow-x': 'hidden'})
 ########################################################################################################################################
 ########################################################################################################################################
