@@ -339,6 +339,9 @@ html.Div([
         ],style={'right':0, 'position':'fixed','top':0, 'bottom':0 ,'borderRadius': '15px', 'width':'10%','height':'100%', 'background-color':'rgba(71,75,80, 0.1)', 'box-shadow': '0 6px 12px 0 rgba(0, 0, 0, 1)'}),
 ##################################################################################
 
+### HTML MAIN ###############
+
+#############################################################################3
     html.Hr(),
     html.H1('AltumVīsiō',style={'font-family':'Optima','margin-top':'50px', 'font-size':'50px'}), #'text-shadow': '4px 6px 4px rgba(0, 0, 0, 1)'
     html.Br(),
