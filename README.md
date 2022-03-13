@@ -1,4 +1,4 @@
-# AltumVisio
+# AltumVisio: python GUI for image processing
 
 <br>
 
@@ -6,3 +6,5 @@
 Format: ![](url)
 
 <br>
+
+< br > A library aimed at easing the repetitive and time-consuming image processing tasks.
